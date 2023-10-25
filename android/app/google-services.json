@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "130740328761",
+    "project_id": "petmatch-10f09",
+    "storage_bucket": "petmatch-10f09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130740328761:android:e2a603d309749560cf30e8",
+        "android_client_info": {
+          "package_name": "com.petmatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2g015onbt4iLlXFBG3Z02aD1Dh5WmUBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
