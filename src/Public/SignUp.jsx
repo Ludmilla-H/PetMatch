@@ -4,14 +4,16 @@ import { Button } from 'react-native-paper';
 
 const SignUp = ({navigation}) => {
 
-  const goToSignIn = () => {
-    navigation.navigate('signin');
-}
+  const inscription = () => {
+
+    
+  }
+
 
   return (
     <View>
       <Text>SignUp</Text>
-      <Button onPress={goToSignIn}>S'inscrire</Button>
+      <Button onPress={inscription}>S'inscrire</Button>
 
     </View>
   )

@@ -4,14 +4,15 @@ import { Button } from 'react-native-paper';
 
 const SignIn = ({navigation}) => {
 
-  const goToSignUp = () => {
-    navigation.navigate('signup');
+const connection = () => {
+
+
 }
 
   return (
     <View>
       <Text>SignIn</Text>
-      <Button onPress={goToSignUp}>Se connecter</Button>
+      <Button onPress={connection}>Se connecter</Button>
 
     </View>
   )
