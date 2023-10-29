@@ -10,7 +10,7 @@ export const user = createSlice({
         },
         resetUser : (state, action) => {
             return null;
-        }
+        },
     }
     
 })
