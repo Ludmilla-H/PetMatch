@@ -2,20 +2,21 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper'
 import auth from '@react-native-firebase/auth';
+import Categories from '../component/Categories';
 
 
 const HomePage = ({navigation}) => {
 
 
-    // const goToSignIn = () => {
-    //     navigation.navigate('signIn');
-    // }
-    // // const goToSignUp = () => {
-    // //     navigation.navigate("signUp");
-    // // }
-    // const goToProfile = () => {
-    //     navigation.navigate("profile");
-    //  }
+    const goToSignIn = () => {
+        navigation.navigate('signin');
+    }
+    const goToSignUp = () => {
+        navigation.navigate("signup");
+    }
+    const goToProfile = () => {
+        navigation.navigate("profile");
+     }
 
      const deconnexion = () => {
 
@@ -27,9 +28,10 @@ const HomePage = ({navigation}) => {
   return (
     <View>
       <Text>Page d'accueil</Text>
-      {/* <Button onPress={goToSignUp}>S'inscrire</Button> */}
-      {/* <Button onPress={goToSignIn}>connectez-vous</Button>
-      <Button onPress={goToProfile}>Mon profil</Button> */}
+      <Categories/>
+      <Button onPress={goToSignUp}>S'inscrire</Button>
+      <Button onPress={goToSignIn}>connectez-vous</Button>
+      <Button onPress={goToProfile}>Mon profil</Button>
       <Button onPress={deconnexion}>déconnexion</Button>
     </View>
   )

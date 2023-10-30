@@ -46,8 +46,9 @@ const RoutesPetmatch = () => {
             <Stack.Navigator>
                 {!user ? (
                     <>
-                        <Stack.Screen name="SignIn" component={SignInScreen} />
-                        <Stack.Screen name="SignUp" component={SignUpScreen} />
+                        <Stack.Screen name="Home" component={HomePage} />          
+                        <Stack.Screen name="signin" component={SignInScreen} />
+                        <Stack.Screen name="signup" component={SignUpScreen} />
 
                     </>
                 ) : (

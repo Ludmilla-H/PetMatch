@@ -10,7 +10,7 @@ const SignInScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   const goToSignUp = () => {
-    navigation.navigate('signUp');
+    navigation.navigate('signup');
     }
   
   const connection = async () => {

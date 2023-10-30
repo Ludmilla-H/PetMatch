@@ -92,7 +92,6 @@ const SignUpScreen = () => {
       <Button onPress={next}>Commencez</Button>
 
 
-
     </>
   )
 }
