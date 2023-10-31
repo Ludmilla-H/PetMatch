@@ -6,8 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const SignUpScreen = () => {
-  
-//initialisation de mes states
+
+  //initialisation de mes states
   const [userName, setUserName] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ const SignUpScreen = () => {
   const next = () => {
 
     // si step est egal à la quatrieme étape appele la fonction (done) 
-    if (step == 5) {
+    if (step == 3) {
       done();
       //sinon aller à létape suivante
     } else {
@@ -56,38 +56,39 @@ const SignUpScreen = () => {
 
       {/* switch case pour incrémenter mes étapes d'inscription */}
       {(step === 1 &&
-        <TextInput
-          placeholder="Nom d'utilisateur"
-          value={userName}
-          onChangeText={setUserName}
-        />
-      )
-        || (step === 2 &&
+        <>
+          <TextInput
+            placeholder="Nom d'utilisateur"
+            value={userName}
+            onChangeText={setUserName}
+          />
           <TextInput
             placeholder="Prénom"
             value={name}
             onChangeText={setName}
           />
-        )
-        || (step === 3 &&
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-          />
-        )
-        || (step === 4 &&
-          <TextInput
-            placeholder="Mot de passe "
-            value={password}
-            onChangeText={setPassword}
-          />
-        )
-        || (step === 5 &&
-         <Text>Vous êtes incrit</Text>
-        )
+        </>
 
-      }
+      )
+
+        || (step === 2 &&
+          <>
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+            />
+
+            <TextInput
+              placeholder="Mot de passe "
+              value={password}
+              onChangeText={setPassword}
+            />
+            </> 
+            )
+          || (step === 3 &&
+            <Text>Vous êtes incrit</Text>
+          ) }
 
       <Button onPress={next}>Commencez</Button>
 

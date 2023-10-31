@@ -16,14 +16,7 @@ const HomePage = ({navigation}) => {
     }
     const goToProfile = () => {
         navigation.navigate("profile");
-     }
-
-     const deconnexion = () => {
-
-      auth().signOut();
-  
-    }
-  
+     }  
 
   return (
     <View>
@@ -32,7 +25,6 @@ const HomePage = ({navigation}) => {
       <Button onPress={goToSignUp}>S'inscrire</Button>
       <Button onPress={goToSignIn}>connectez-vous</Button>
       <Button onPress={goToProfile}>Mon profil</Button>
-      <Button onPress={deconnexion}>déconnexion</Button>
     </View>
   )
 }

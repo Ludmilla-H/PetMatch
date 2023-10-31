@@ -9,6 +9,7 @@ import ProfilPage from '../Private/ProfilPage';
 import SignInScreen from '../Public/SignInScreen';
 import SignUpScreen from '../Public/SignUpScreen';
 import HomePage from '../Public/HomePage';
+import AddPets from '../component/AddPets';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,15 +47,16 @@ const RoutesPetmatch = () => {
             <Stack.Navigator>
                 {!user ? (
                     <>
-                        <Stack.Screen name="Home" component={HomePage} />          
+                        <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
                         <Stack.Screen name="signin" component={SignInScreen} />
                         <Stack.Screen name="signup" component={SignUpScreen} />
 
                     </>
                 ) : (
                     <>      
-                        <Stack.Screen name="Home" component={HomePage} />          
-                        <Stack.Screen name="profile" component={ProfilPage} />
+                        <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
+                        <Stack.Screen name="profile" component={ProfilPage} options={{headerShown: false}}/>
+                        <Stack.Screen name="addPets" component={AddPets} options={{headerShown: false}}/>
 
                     </>
                 )}
