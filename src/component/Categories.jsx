@@ -7,8 +7,7 @@ import ItemCategories from '../Item/ItemCategories';
 const Categories = () => {
 
     const [categories, setCategories] = useState([]);
-
-
+    
     const loadCategory = async () => {
 
         const dataCategories = await loadData('categories');
@@ -22,12 +21,13 @@ const Categories = () => {
 
 
     return (
-        <View>
+        <View >
             <FlatList
                 data={categories}
-                renderItem={({item})=> <ItemCategories categories={item}/>}
+                renderItem={({item})=> <ItemCategories categorie={item}/>}
                 keyExtractor={item => item.id}
                 horizontal={true}
+
             />
         </View>
     )

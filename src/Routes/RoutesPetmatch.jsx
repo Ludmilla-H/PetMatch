@@ -10,8 +10,34 @@ import SignInScreen from '../Public/SignInScreen';
 import SignUpScreen from '../Public/SignUpScreen';
 import HomePage from '../Public/HomePage';
 import AddPets from '../component/AddPets';
+import AnimalProfilPage from '../Private/AnimalProfilPage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+// const TabNavigator = () => {
+//     return (
+//     <Tab.Navigator>
+//         <Tab.Screen name="Home" component={HomePage} />
+//         <Tab.Screen name="profile" component={ProfilPage} />
+//     </Tab.Navigator>
+//     );
+//   };
+
+const TabProfilNavigation = () => {
+    return (
+    <Stack.Navigator>
+        <Stack.Screen name="profilePage" component={ProfilPage} options={{headerShown: false, tabBarStyle: { display: 'none' }}} />
+        <Stack.Screen name="addPets" component={AddPets} options={{headerShown: false, tabBarStyle: { display: 'none' }}}  />
+        <Stack.Screen name="animalProfile" component={AnimalProfilPage} options={{tabBarVisible: true}}/>
+
+    </Stack.Navigator>
+    );
+  };
+
 
 const RoutesPetmatch = () => {
 
@@ -43,26 +69,27 @@ const RoutesPetmatch = () => {
 
     return (
 
-        <NavigationContainer>
-            <Stack.Navigator>
+            <Tab.Navigator>
                 {!user ? (
                     <>
-                        <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
-                        <Stack.Screen name="signin" component={SignInScreen} />
-                        <Stack.Screen name="signup" component={SignUpScreen} />
+                        <Tab.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
+                        <Tab.Screen name="signin" component={SignInScreen} />
+                        <Tab.Screen name="signup" component={SignUpScreen} />
 
                     </>
                 ) : (
                     <>      
-                        <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
-                        <Stack.Screen name="profile" component={ProfilPage} options={{headerShown: false}}/>
-                        <Stack.Screen name="addPets" component={AddPets} options={{headerShown: false}}/>
+                        <Tab.Screen name="Home" component={HomePage} options={{headerShown: false}}/>          
+                        <Tab.Screen name="profile" component={TabProfilNavigation} options={{headerShown: false}}/>
 
                     </>
                 )}
-            </Stack.Navigator>
-        </NavigationContainer>
+            </Tab.Navigator>
     )
+
+
 }
+
+
 
 export default RoutesPetmatch

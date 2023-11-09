@@ -18,7 +18,7 @@ const SignUpScreen = () => {
   //fonction pour incrementer les étapes de l'inscription
   const next = () => {
 
-    // si step est egal à la quatrieme étape appele la fonction (done) 
+    // si step est egal à la 3eme étape appeler la fonction (done) 
     if (step == 3) {
       done();
       //sinon aller à létape suivante
@@ -52,7 +52,7 @@ const SignUpScreen = () => {
 
 
   return (
-    <>
+    <> 
 
       {/* switch case pour incrémenter mes étapes d'inscription */}
       {(step === 1 &&

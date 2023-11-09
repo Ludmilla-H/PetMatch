@@ -32,6 +32,22 @@ export const insertData = async (collectionName, data) => {
 }; //end loadData
 
 
+//fonction pour recupérer l'id par rapport a la catégorie de l'animal
+export const loadDataPets = async (categorieId) => {
+  const snapShot = await firestore().collection("animal").where("categorie", "==" , categorieId).get()
+
+  // Vérification des données
+  if (!snapShot.empty) {
+    const data = snapShot.docs.map(doc => {
+      return {id: doc.id, ...doc.data()};
+    });
+    return data
+  } else {
+    return [] ;
+  }
+}; //end loadData
+
+
 
 
 
