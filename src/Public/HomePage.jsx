@@ -32,7 +32,7 @@ const categorieKey = useSelector(state => state.categorie)
 
   return (
     <View style={StylesHome.container}>
-      <Image source={GreenBig} style={{ height: 276, width: 176, position: "absolute", top: 100, right: -20, objectFit: 60, }} />
+      <Image source={GreenBig} style={{ height: 276, width: 176, position: "absolute", top: 100, right: -20}} />
       <Image source={orangeLittle} style={{ height: 156, width: 103, position: "absolute", right: 0, bottom: 180, }} />
       <Image source={orangeBig} style={{ height: 198, width: 215, position: "absolute", bottom: -30, }} />
       <Image source={GreenLittle} style={{ height: 156, width: 107, position: "absolute", bottom: 100, }} />

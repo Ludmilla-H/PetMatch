@@ -3,10 +3,10 @@ import { createSlice } from "@reduxjs/toolkit"
 export const categorie = createSlice({
 
     name: "categorie",
-    initialState: null,
+    initialState: [],
     reducers:{
         setCategories : (state, action) => {
-            // console.log(action.payload)
+            console.log("redux state" ,state,"redux categorie" , action.payload)
             return action.payload ;
         },
 
