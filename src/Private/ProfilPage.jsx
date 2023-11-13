@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import StylesProfile from '../Styles/StylesProfile';
-import { Avatar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -18,7 +17,7 @@ const orangeBig = require('../assets/images/OrangeBig.png');
 const GreenLittle = require('../assets/images/GreenLittle.png');
 
 
-const ProfilPage = ({ navigation }) => {
+const ProfilPage = ({ navigation , route}) => {
 
 
   //récuperer le state de user dans le store
@@ -30,7 +29,6 @@ const ProfilPage = ({ navigation }) => {
   const [prenom, setPrenom] = useState('');
   const [email, setEmail] = useState('');
   const [numero, setNumero] = useState('');
-  // const [imageUri, setImageUri] = useState(null);
 
 
   //fonction pour retourner en arrière
@@ -79,7 +77,6 @@ const ProfilPage = ({ navigation }) => {
     console.log('Image envoyée avec succès !', url);
     firestore().collection("user").doc(userId).update({ avatar: url });
 
-
   };
 
 
@@ -107,8 +104,8 @@ const ProfilPage = ({ navigation }) => {
     navigation.navigate('addPets')
   }
 
-  const goToAnimalProfile = () => {
-    navigation.navigate('animalProfile')
+  const goToAnimalProfile = (animalID) => {
+    navigation.navigate('animalProfile', {animalID})
   }
 
   //se déconnecter de son compte

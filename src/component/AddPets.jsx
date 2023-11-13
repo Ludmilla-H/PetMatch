@@ -41,7 +41,7 @@ const AddPets = ({ navigation }) => {
 
     const done = () => {
         console.log(name, age, weight, maladie, userId)
-        const animalData = { name: name, weight: weight, age: age, race:subCategoryId, sexe:sexe, image: image, maladie: maladie, userId: userId }
+        const animalData = { name: name, weight: weight, age: age, race: subCategoryId, sexe: sexe, image: image, maladie: maladie, userId: userId }
 
         insertData("animal", animalData)
     }
@@ -61,7 +61,6 @@ const AddPets = ({ navigation }) => {
             })
         setSubCategory(subcategoriesData);
         console.log(subcategoriesData)
-
     }
 
 
@@ -90,14 +89,10 @@ const AddPets = ({ navigation }) => {
     }, [])
 
 
-
-
-
-
     return (
         <View>
 
-<Icon name="arrowleft" size={30} color="#000" onPress={goToProfil} />
+            <Icon name="arrowleft" size={30} color="#000" onPress={goToProfil} />
 
             <Text>Ajouter un animal</Text>
 

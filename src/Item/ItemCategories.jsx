@@ -1,13 +1,20 @@
-import { View, Text, Alert, Modal, StyleSheet, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Alert, Modal, StyleSheet, Pressable, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import StylesHome from '../Styles/StylesHome'
 import { setCategories } from '../Redux/categorie';
 import { useDispatch } from 'react-redux';
 import { Button } from 'react-native-paper';
+import firestore from '@react-native-firebase/firestore';
+import { loadData } from '../commonjs/db';
 
-const ItemCategories = ({categorie}) => {
+
+const ItemCategories = ({ categorie }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [subCategories, setSubCategories] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [categoryId, setCategoryId] = useState();
+  const [subCategoryId, setSubCategoryId] = useState();
 
   dispatch = useDispatch();
 
@@ -16,51 +23,85 @@ const ItemCategories = ({categorie}) => {
     dispatch(setCategories(categorie.id))
   }
 
-  
+  const loadCategory = async () => {
+
+    const dataCategories = await loadData('subcategories');
+
+    setSubCategories(dataCategories)
+}
+
+//fonction pour récupérer les sous-catégorie grâce à leur id et leur race
+const getSubCategory = async (key) => {
+  setCategoryId(key)
+  console.log("CategoryId",categoryId,"key=>",key)
+
+  const subcategories = await loadData('subcategories')
+  console.log("subcategories :", subcategories)
+  const subcategoriesData = subcategories.filter(item => item.id == key)
+      .map(data => {
+          const newData = { key: data.id, value: data.race }
+          return newData
+      })
+  setSubCategory(subcategoriesData);
+  console.log("subcategoriesData :",subcategoriesData)
+}
+
+const subCat = (id) => {
+  console.log("subCat :", id)
+  setModalVisible(!modalVisible)
+      getSubCategory(id);
+}
+
+useEffect(() => {
+    loadCategory();
+}, [])
+
+
+
   return (
     <View>
 
-<View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          console.log('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text  style={styles.modalText}>Voici mes catégories !</Text>
+              <FlatList
+                data={subCategories}
+                renderItem={({item})=> <Text style={styles.modalText} onPress={() => subCat(item.id)}>{item.race}</Text>}
+                keyExtractor={item => item.id}
+
+            />
+              
+              {/* <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </Pressable> */}
+            </View>
           </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
-    </View>
-      
-      <Button onPress={saveCategorie} 
-      style={StylesHome.categories} 
-      // labelStyle=
-      // {{
-      // color:"black",
-      // backgroundColor:"white", 
-      // borderRadius: 20, 
-      // elevation: 4, 
-      // height: 70, 
-      // width: 70, 
-      // fontSize: 20
-      // }}
-      >{categorie.name}
-      </Button>
+        </Modal>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}>
+          <Text style={styles.textStyle}>{categorie.name}
+          </Text>
+
+
+          {/* <Button onPress={saveCategorie}
+            style={StylesHome.categories}> {categorie.name}
+          </Button> */}
+
+        </Pressable>
+      </View>
+
     </View>
   )
 }
@@ -92,10 +133,10 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#000',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#000',
   },
   textStyle: {
     color: 'white',
@@ -103,8 +144,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
-    marginBottom: 15,
     textAlign: 'center',
+    marginVertical: 3,
+    fontSize: 15,
   },
 });
 

@@ -18,21 +18,12 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-// const TabNavigator = () => {
-//     return (
-//     <Tab.Navigator>
-//         <Tab.Screen name="Home" component={HomePage} />
-//         <Tab.Screen name="profile" component={ProfilPage} />
-//     </Tab.Navigator>
-//     );
-//   };
-
 const TabProfilNavigation = () => {
     return (
     <Stack.Navigator>
         <Stack.Screen name="profilePage" component={ProfilPage} options={{headerShown: false, tabBarStyle: { display: 'none' }}} />
         <Stack.Screen name="addPets" component={AddPets} options={{headerShown: false, tabBarStyle: { display: 'none' }}}  />
-        <Stack.Screen name="animalProfile" component={AnimalProfilPage} options={{tabBarVisible: true}}/>
+        <Stack.Screen name="animalProfile" component={AnimalProfilPage} options={{headerShown: false}}/>
 
     </Stack.Navigator>
     );

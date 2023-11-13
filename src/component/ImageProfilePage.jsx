@@ -30,13 +30,15 @@ const imageProfilePage = () => {
 
             })
             return () => {
+                // Lorsque le composant est démonté, désabonnez-vous de l'écouteur pour éviter les fuites de mémoire
                 unsubscribe(); 
               };
     }, []);
 
     return (
 <View>
-      {profileImageURL && <Image source={{ uri: profileImageURL }} style={{ width: 55, height: 55, borderRadius: 25 }} />}
+    {/* Affichez l'image si l'URL est présente */}
+      {profileImageURL && <Image source={{ uri: profileImageURL }} style={{ width: 60, height: 60, borderRadius: 25, marginLeft: 170 }} />}
 </View>    )
 }
 
