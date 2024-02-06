@@ -1,41 +1,37 @@
-import { View, Text, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { loadDataPets } from '../commonjs/db';
+import { loadDataPets, loadDataPetsBySubCat } from '../commonjs/db';
 import ItemAnimal from '../Item/ItemAnimal';
+import { useNavigation } from '@react-navigation/native';
 
 const PetList = () => {
 
-    const [animals, setAnimal] = useState([]) 
+    const navigation = useNavigation()
+
+    // const [animals, setAnimal] = useState([]) 
     console.log(animals);
 
     //lire dans le store
-    const categorieKey = useSelector(state => state.categorie);
+    const animals = useSelector(state => state.animals);
+    // console.log("subCategorykey", subCategorykey)
 
-    //déclencher la fonction afin de charger les animaux par catégories
-    const loadPetsByCat = async () => {
-        const snapShotPet = await loadDataPets(categorieKey)
-        console.log(snapShotPet)
-        setAnimal(snapShotPet) ;
-
-    }
-
-    //dés qu'il y a un changement, il déclenche sur une catégorie
-    useEffect(() => {
-        console.log(categorieKey)
-        loadPetsByCat();
-    }, [categorieKey])
+    // const detailAnimal = (animals) => { 
+    //     navigation.navigate('detailhomeanimal', {animals})
+    //     console.log("je suis dans detail animal")
+    // }
 
 
     return (
-        <View>
-            <FlatList
-            data = {animals}
-            renderItem = {({item}) => <ItemAnimal animal={item}/>}
-            keyExtractor = {item => item.id}
-            numColumns={2}
-            />
-        </View>
+        <>
+                <FlatList
+                    data={animals}
+                    renderItem={({ item }) => <ItemAnimal animal={item} />}
+                    keyExtractor={item => item.id}
+                    numColumns={2}
+                />
+
+        </>
     )
 }
 

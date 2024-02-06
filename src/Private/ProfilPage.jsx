@@ -10,19 +10,21 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import ImageProfilePage from '../component/ImageProfilePage';
 
-
 const GreenBig = require('../assets/images/Ellipse18.png');
 const orangeLittle = require('../assets/images/Ellipse19.png');
 const orangeBig = require('../assets/images/OrangeBig.png');
 const GreenLittle = require('../assets/images/GreenLittle.png');
 
 
-const ProfilPage = ({ navigation , route}) => {
-
+const ProfilPage = ({ navigation }) => {
 
   //récuperer le state de user dans le store
   const userId = useSelector(state => state.user);
-  console.log(userId);
+  // console.log(userId);
+
+  // const {idAnimal}   = route.params;
+  // console.log(idAnimal)
+  // const [loading, setLoading] = useState(true);
 
   //initialisation de mes states
   const [nom, setNom] = useState('');
@@ -30,10 +32,9 @@ const ProfilPage = ({ navigation , route}) => {
   const [email, setEmail] = useState('');
   const [numero, setNumero] = useState('');
 
-
   //fonction pour retourner en arrière
   const goBackToHome = () => {
-    navigation.goBack()
+    navigation.goBack() ; 
   }
 
   const callBackCamera = (response) => {
@@ -43,8 +44,6 @@ const ProfilPage = ({ navigation , route}) => {
       console.log('Erreur :', response.error);
     } else {
       console.log('Image prise avec succès. Voici les détails :', response);
-
-      // Vous pouvez utiliser response.uri pour accéder à l'URI de la photo.
     }
   }
 
@@ -76,16 +75,12 @@ const ProfilPage = ({ navigation , route}) => {
 
     console.log('Image envoyée avec succès !', url);
     firestore().collection("user").doc(userId).update({ avatar: url });
-
   };
-
 
   //modifier et ajouter les données d'un utilisateur dans firestore
   const modifier = () => {
-
     console.log("email", email, "prenom", prenom, "nom", nom, "numero", numero)
     firestore().collection("user").doc(userId).update({ nom, prenom, numero });
-
   }
 
   const read = async () => {
@@ -104,25 +99,30 @@ const ProfilPage = ({ navigation , route}) => {
     navigation.navigate('addPets')
   }
 
-  const goToAnimalProfile = (animalID) => {
-    navigation.navigate('animalProfile', {animalID})
-  }
 
   //se déconnecter de son compte
   const deconnexion = () => {
     auth().signOut();
   }
 
+
+  const goToMyAnimalPage = () => {
+          navigation.navigate('myanimalpage');
+  }
+
+  // if (loading) {
+  //   return <ActivityIndicator size="large" color="#000" />;
+  // }
+
   useEffect(() => {
     read();
   }, [])
-
 
   return (
     <View style={StylesProfile.container}>
 
       <Image source={GreenBig} style={{ height: 276, width: 176, position: "absolute", top: 100, right: -20}} />
-      <Image source={orangeLittle} style={{ height: 156, width: 103, position: "absolute", right: 0, bottom: 180, }} />
+      <Image source={orangeLittle} style={{ height: 156, width: 103, position: "absolute", right: 0, bottom: 140, }} />
       <Image source={orangeBig} style={{ height: 198, width: 215, position: "absolute", bottom: -30, }} />
       <Image source={GreenLittle} style={{ height: 156, width: 107, position: "absolute", bottom: 100, }} />
 
@@ -139,8 +139,8 @@ const ProfilPage = ({ navigation , route}) => {
       </View>
 
       <View style={StylesProfile.bar}>
-        <Button labelStyle={{ color: "#000", textDecorationLine: "underline" }} onPress={goToAnimalProfile}>Mon profil</Button>
-        <Button labelStyle={{ color: "#000", textDecorationLine: "underline" }} onPress={goToAnimalProfile}>Mes animaux</Button>
+        <Button labelStyle={{ color: "#000", textDecorationLine: "underline" }} >Mon profil</Button>
+        <Button labelStyle={{ color: "#000", textDecorationLine: "underline" }} onPress={goToMyAnimalPage}>Mes animaux</Button>
       </View>
 
       <TextInput

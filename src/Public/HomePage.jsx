@@ -16,24 +16,24 @@ const GreenLittle = require('../assets/images/GreenLittle.png');
 
 const HomePage = ({ navigation }) => {
 
-const categorieKey = useSelector(state => state.categorie)
+// const categorieKey = useSelector(state => state.categorie)
 
 
 
-  const goToSignIn = () => {
-    navigation.navigate('signin');
-  }
-  const goToSignUp = () => {
-    navigation.navigate("signup");
-  }
-  const goToProfile = () => {
-    navigation.navigate("profile");
-  }
+  // const goToSignIn = () => {
+  //   navigation.navigate('signin');
+  // }
+  // const goToSignUp = () => {
+  //   navigation.navigate("signup");
+  // }
+  // const goToProfile = () => {
+  //   navigation.navigate("profile");
+  // }
 
   return (
     <View style={StylesHome.container}>
       <Image source={GreenBig} style={{ height: 276, width: 176, position: "absolute", top: 100, right: -20}} />
-      <Image source={orangeLittle} style={{ height: 156, width: 103, position: "absolute", right: 0, bottom: 180, }} />
+      <Image source={orangeLittle} style={{ height: 156, width: 103, position: "absolute", right: 0, bottom: 140, }} />
       <Image source={orangeBig} style={{ height: 198, width: 215, position: "absolute", bottom: -30, }} />
       <Image source={GreenLittle} style={{ height: 156, width: 107, position: "absolute", bottom: 100, }} />
 
@@ -55,9 +55,9 @@ const categorieKey = useSelector(state => state.categorie)
 
       <PetList/>
 
-      <Button onPress={goToSignUp}>S'inscrire</Button>
+      {/* <Button onPress={goToSignUp}>S'inscrire</Button>
       <Button onPress={goToSignIn}>connectez-vous</Button>
-      <Button onPress={goToProfile}>Mon profil</Button>
+      <Button onPress={goToProfile}>Mon profil</Button> */}
 
     </View>
   )

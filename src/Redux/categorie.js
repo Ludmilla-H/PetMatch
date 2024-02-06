@@ -7,13 +7,15 @@ export const categorie = createSlice({
     reducers:{
         setCategories : (state, action) => {
             console.log("redux state" ,state,"redux categorie" , action.payload)
-            return action.payload ;
+            return action.payload.flat(); // Aplatir le tableau
         },
 
         resetCategories : (state, action) => {
             return null;
         },
     }
+
+    
 
 })
 
