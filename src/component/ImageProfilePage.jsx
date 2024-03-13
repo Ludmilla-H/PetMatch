@@ -38,7 +38,7 @@ const imageProfilePage = () => {
     return (
 <View>
     {/* Affichez l'image si l'URL est présente */}
-      {profileImageURL && <Image source={{ uri: profileImageURL }} style={{ width: 60, height: 60, borderRadius: 25, marginLeft: 170 }} />}
+      {profileImageURL && <Image source={{ uri: profileImageURL }} style={{ width: 60, height: 60, borderRadius: 25, marginLeft: 140 }} />}
 </View>    )
 }
 

@@ -6,11 +6,8 @@ import ModalSubCat from './ModalSubCat'
 const ItemCategories = ({categorie}) => {
 
   const loadCategory = async (id) => {
-
-    console.log("loadCategory => id:", id)
+    
     const dataCategories = await loadData('subcategories');
-    // console.log("loadCategory => dataCategories:" , dataCategories) 
-    // console.log("dataCatFilter", dataCategories.filter(item => item.category == id))
     const subCategories = dataCategories.filter(item => item.category == id)
         .map(data => {
             // Ajoutez d'autres propriétés ou objets au besoin
@@ -24,18 +21,12 @@ const ItemCategories = ({categorie}) => {
             };
             return newData
         })
-    // console.log("subCategories:", subCategories)
-
-    // setSubCategories(dataCategories)
-    // saveCategorie(subCategories);
     
 }
 
 useEffect(() => {
     loadCategory();
 }, [])
-
-
 
   return (
     <View>

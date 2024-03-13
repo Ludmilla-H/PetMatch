@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -14,7 +14,8 @@ import AnimalProfilPage from '../Private/AnimalProfilPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyAnimalsPage from '../component/MyAnimalsPage';
 import DetailHomeAnimal from '../component/DetailHomeAnimal';
-import ProfilProprietaire from '../component/ProfilProprietaire';
+// import ProfilProprietaire from '../component/ProfilProprietaire';
+import SaillieModal from '../component/SaillieModal';
 
 
 const Stack = createNativeStackNavigator();
@@ -25,10 +26,11 @@ const TabProfilNavigation = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="profilePage" component={ProfilPage} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
-            <Stack.Screen name="proprioProfil" component={ProfilProprietaire} options={{headerShown: false} }/>
             <Stack.Screen name="addPets" component={AddPets} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Stack.Screen name="myanimalpage" component={MyAnimalsPage} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Stack.Screen name="animalProfile" component={AnimalProfilPage} options={{ headerShown: false }} />
+            {/* <Stack.Screen name="ConditionGenerale" component={ConditionGenerale} options={{headerShown: false} }/> */}
+
         </Stack.Navigator>
     );
 };
@@ -36,7 +38,9 @@ const TabHomeNavigation = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
-            <Stack.Screen name="detailhomeanimal" component={DetailHomeAnimal} options={{headerShown: false} }/>
+            <Stack.Screen name="detailhomeanimal" component={DetailHomeAnimal} options={{ headerShown: false }} />
+            <Stack.Screen name="sailliemodal" component={SaillieModal} options={{ headerShown: false }} />
+            {/* <Stack.Screen name="proprioProfil" component={ProfilProprietaire} options={{headerShown: false} }/> */}
             {/* <Stack.Screen name="addPets" component={AddPets} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Stack.Screen name="myanimalpage" component={MyAnimalsPage} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
             <Stack.Screen name="animalProfile" component={AnimalProfilPage} options={{ headerShown: false }} /> */}
@@ -74,71 +78,120 @@ const RoutesPetmatch = () => {
 
 
     return (
-
-        <Tab.Navigator screenOptions={{
-            tabBarShowLabel: false,
-            tabBarStyle: [{
-                position: 'absolute',
-                bottom: 25,
-                left: 20,
-                right: 20,
-                elevation: 0,
-                backgroundColor: "white",
-                borderRadius: 30,
-                // borderWidth: 2,
-                height: 60,
-                ...styles.shadow,
-            }]
-        }}
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -64} // Ajustez la valeur en fonction de votre interface utilisateur
         >
-            {!user ? (
-                <>
-                    <Tab.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
-                    <Tab.Screen name="signin" component={SignInScreen} />
-                    <Tab.Screen name="signup" component={SignUpScreen} />
-                </>
-            ) : (
-                <>
-                    <Tab.Screen name="Home" component={TabHomeNavigation} options={{
-                        headerShown: false,
-                        tabBarIcon: ({ focused }) => (
-                            <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
-                                <Image source={require('../assets/images/home.png')}
-                                    resizeMode="contain"
-                                    style={{
-                                        width: 25,
-                                        height: 25,
-                                        tintColor: focused ? '#FFBD59' : "#000"
-                                    }}
-                                />
-                                {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
-                            </View>
-                        ),
-                    }}
-                    />
+            <Tab.Navigator screenOptions={{
+                tabBarShowLabel: false,
+                tabBarStyle: [{
+                    position: 'absolute',
+                    bottom: 25, left: 20, right: 20,
+                    elevation: 0,
+                    backgroundColor: "white",
+                    borderRadius: 30,
+                    height: 60,
+                    ...styles.shadow,
+                }],
+                // tabBarOptions: [{
+                //     keyboardHidesTabBar: true,
+                // }],
 
-                    <Tab.Screen name="profile" component={TabProfilNavigation} options={{
-                        headerShown: false,
-                        tabBarIcon: ({ focused }) => (
-                            <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
-                                <Image source={require('../assets/images/profile.png')}
-                                    resizeMode="contain"
-                                    style={{
-                                        width: 25,
-                                        height: 25,
-                                        tintColor: focused ? '#FFBD59' : "#000"
-                                    }}
-                                />
-                                {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
-                            </View>
-                        ),
+            }}
+            >
+                {!user ? (
+                    <>
+                        <Tab.Screen name="Home" component={HomePage} options={{
+                            headerShown: false,
+                            tabBarIcon: ({ focused }) => (
+                                <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
+                                    <Image source={require('../assets/images/home.png')}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: focused ? '#FFBD59' : "#000"
+                                        }}
+                                    />
+                                </View>
+                            ),
+                        }} />
+                        <Tab.Screen name="signin" component={SignInScreen} options={{
+                            headerShown: false,
+                            tabBarIcon: ({ focused }) => (
+                                <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
+                                    <Image source={require('../assets/images/profile.png')}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: focused ? '#FFBD59' : "#000"
+                                        }}
+                                    />
+                                    {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
+                                </View>
+                            ),
+                        }} />
+
+                        <Tab.Screen name="signup" component={SignUpScreen} options={{
+                            headerShown: false,
+                            tabBarIcon: ({ focused }) => (
+                                <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
+                                    <Image source={require('../assets/images/profile.png')}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: focused ? '#FFBD59' : "#000"
+                                        }}
+                                    />
+                                    {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
+                                </View>
+                            ),
+                        }} />
+                    </>
+                ) : (
+                    <>
+                        <Tab.Screen name="Home" component={TabHomeNavigation} options={{
+                            headerShown: false,
+                            tabBarIcon: ({ focused }) => (
+                                <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
+                                    <Image source={require('../assets/images/home.png')}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: focused ? '#FFBD59' : "#000"
+                                        }}
+                                    />
+                                    {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
+                                </View>
+                            ),
+                        }}
+                        />
+                        <Tab.Screen name="profile" component={TabProfilNavigation} options={{
+                            headerShown: false,
+                            tabBarIcon: ({ focused }) => (
+                                <View style={{ alignItems: "center", justifyContent: "center", top: 0 }}>
+                                    <Image source={require('../assets/images/profile.png')}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: focused ? '#FFBD59' : "#000"
+                                        }}
+                                    />
+                                    {/* <Text style = {{color: focused ? '#FFBD59' : "#000", fontSize: 12}}>HOME</Text> */}
+                                </View>
+                            ),
 
 
-                    }} />
-
-                </>
-            )}
-        </Tab.Navigator>
+                        }} />
+                    </>
+                )}
+            </Tab.Navigator>
+        </KeyboardAvoidingView>
     )
 }
 

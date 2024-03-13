@@ -15,7 +15,7 @@ export const loadData = async collectionName => {
   }
 }; //end loadData
 
-//chargement des données d'une collection a partie de son name
+//ajouter des données dans une collection
 export const insertData = async (collectionName, data) => {
   // Vérification des données
   try {

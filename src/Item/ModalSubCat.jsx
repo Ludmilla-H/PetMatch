@@ -16,7 +16,6 @@ const ModalSubCat = ({ categorie }) => {
 
     //récupere mes sous-catégorie grace a loadData et les filtre en fonction de leur key(id)
     const getSubCategory = async (key) => {
-
         const subcategories = await loadData('subcategories')
         // console.log("subcategories :", subcategories)
         const subcategoriesData = subcategories.filter(item => item.category == key)
@@ -29,23 +28,18 @@ const ModalSubCat = ({ categorie }) => {
     //fermer le modal en appuiyant sur la sous-catégories
     const toggleModal = () => {
         setModalVisible(!modalVisible)
-        // console.log("setModalVisible")
     }
 
     //lire dans le store pour afficher les sous-catégories en fonction de leur id 
     const subCat = async (id) => {
-
         const dataAnimals = await animalsBySubCat(id);
         dispatch(setAnimals(dataAnimals));
         toggleModal();
-
     }
 
     useEffect(() => {
         getSubCategory(categorie.id)
-
     }, [])
-
 
 
     return (
@@ -75,7 +69,6 @@ const ModalSubCat = ({ categorie }) => {
                             renderItem={({ item }) => <Text style={StylesCategorie.modalText} onPress={() => subCat(item.id)}>{item.race}</Text>}
                             keyExtractor={item => item.id}
                         />
-
                     </View>
                 </View>
             </Modal>
@@ -85,10 +78,6 @@ const ModalSubCat = ({ categorie }) => {
                 onPress={toggleModal}>
                 <Text style={StylesCategorie.textStyle}>{categorie.name}
                 </Text>
-                {/* <Button onPress={saveCategorie}
-            style={StylesHome.categories}> {categorie.name}
-          </Button> */}
-
             </Pressable>
         </View>
     )

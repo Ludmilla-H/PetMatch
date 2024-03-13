@@ -112,9 +112,6 @@ const AnimalProfilPage = ({ navigation, route }) => {
         };
     }, []);
 
-
-
-
     return (
         <View style={StylesHome.container}>
 
@@ -128,7 +125,7 @@ const AnimalProfilPage = ({ navigation, route }) => {
             <View style={StylesAnimal.avatar}>
                 {/* Affichez l'image si l'URL est présente */}
                 {profileAnimalImageURL && <Image source={{ uri: profileAnimalImageURL }} style={{ width: 60, height: 60, borderRadius: 30 }} />}
-
+                {/* <Icon name="picture" size={30} color="#000" onPress={goBackToHome} /> */}
             </View>
 
 
@@ -148,7 +145,7 @@ const AnimalProfilPage = ({ navigation, route }) => {
 
             <TextInput
                 style={StylesAnimal.input}
-                placeholder="Age de l'animal"
+                placeholder="Âge de l'animal"
                 value={age}
                 onChangeText={setAge}
             />
@@ -168,8 +165,12 @@ const AnimalProfilPage = ({ navigation, route }) => {
             />
 
 
-            <Button onPress={modifier}>Valider les modifications</Button>
-            <Button onPress={choisirEtEnvoyerImage}> choisir une image </Button>
+            <Button onPress={modifier}>
+            <Icon name="check" size={28} color="#000" onPress={goBackToHome} />
+            </Button>
+            <Button onPress={choisirEtEnvoyerImage}
+                    labelStyle={{color:"black"}}
+            > choisir une image pour mon animal</Button>
 
         </View>
     )

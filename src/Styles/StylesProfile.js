@@ -11,6 +11,7 @@ export default StyleSheet.create ({
         fontSize: 30,
         fontWeight: "bold",
         color: "black",
+        // fontFamily: "kanit bold",
     },
 
     welcome: {

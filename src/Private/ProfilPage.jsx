@@ -18,13 +18,9 @@ const GreenLittle = require('../assets/images/GreenLittle.png');
 
 const ProfilPage = ({ navigation }) => {
 
-  //récuperer le state de user dans le store
+  //récuperer l'etat de user dans le store
   const userId = useSelector(state => state.user);
   // console.log(userId);
-
-  // const {idAnimal}   = route.params;
-  // console.log(idAnimal)
-  // const [loading, setLoading] = useState(true);
 
   //initialisation de mes states
   const [nom, setNom] = useState('');
@@ -52,8 +48,8 @@ const ProfilPage = ({ navigation }) => {
     const options = {
       title: 'Select Image',
       storageOptions: {
-        skipBackup: true, // do not backup to iCloud
-        path: 'images', // store camera images under Pictures/images for android and Documents/images for iOS
+        skipBackup: true,
+        path: 'images', 
       },
     }
 
@@ -83,6 +79,7 @@ const ProfilPage = ({ navigation }) => {
     firestore().collection("user").doc(userId).update({ nom, prenom, numero });
   }
 
+  //récuperer les infos de l'utilisateur pour qu'il reste sur l'écran
   const read = async () => {
     const snapUser = await firestore().collection('user').doc(userId).get();
 
@@ -164,8 +161,7 @@ const ProfilPage = ({ navigation }) => {
         onChangeText={setNumero}
       />
 
-
-      <Button onPress={modifier} labelStyle={{ color: "#000", left: -80, }}> Valider les modifications</Button>
+      <Button onPress={modifier} labelStyle={{ color: "#000", left: -60, }}> Valider les modifications</Button>
       <Button onPress={deconnexion}>déconnexion</Button>
       <Button onPress={addPets}> + ajouter un animal</Button>
       <Button onPress={choisirEtEnvoyerImage}> choisir une image </Button>

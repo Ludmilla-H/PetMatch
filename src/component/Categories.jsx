@@ -27,7 +27,6 @@ const Categories = () => {
                 renderItem={({item})=> <ItemCategories categorie={item}/>}
                 keyExtractor={item => item.id}
                 horizontal={true}
-
             />
         </View>
     )

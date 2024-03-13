@@ -14,21 +14,8 @@ const orangeBig = require('../assets/images/OrangeBig.png');
 const GreenLittle = require('../assets/images/GreenLittle.png');
 
 
-const HomePage = ({ navigation }) => {
+const HomePage = () => {
 
-// const categorieKey = useSelector(state => state.categorie)
-
-
-
-  // const goToSignIn = () => {
-  //   navigation.navigate('signin');
-  // }
-  // const goToSignUp = () => {
-  //   navigation.navigate("signup");
-  // }
-  // const goToProfile = () => {
-  //   navigation.navigate("profile");
-  // }
 
   return (
     <View style={StylesHome.container}>
@@ -54,10 +41,6 @@ const HomePage = ({ navigation }) => {
       </View>
 
       <PetList/>
-
-      {/* <Button onPress={goToSignUp}>S'inscrire</Button>
-      <Button onPress={goToSignIn}>connectez-vous</Button>
-      <Button onPress={goToProfile}>Mon profil</Button> */}
 
     </View>
   )
